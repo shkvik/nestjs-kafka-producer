@@ -1,18 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { ProducerService } from '../kafka/kafka.service';
+import { Inject, Injectable } from '@nestjs/common';
+import { ClientKafka } from '@nestjs/microservices';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable()
 export class ExampleService {
   
   constructor(
-    private readonly producerSertvice: ProducerService
+    @Inject('EXAMPLE_SERVICE')
+    private readonly exampleClient: ClientKafka
   ){}
   
   public async getHello(): Promise<string> {
-    const res = await this.producerSertvice.produce({
-      topic: 'test',
-      messages: [{ value: 'Test message' }]
-    })
-    return JSON.stringify(res);
+    const test = await lastValueFrom(
+      this.exampleClient.emit('EXAMPLE_TOPIC', "HELLO WORLD")
+    ) ;
+    return JSON.stringify(test)
   }
 }
