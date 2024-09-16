@@ -10,6 +10,12 @@ export class ExampleService {
     private readonly exampleClient: ClientKafka
   ){}
   
+  // Внедрить отдельно варианты отправки формата.
+  // async onModuleInit() {
+  //   this.exampleClient.subscribeToResponseOf('example.topic');
+  //   await this.exampleClient.connect();
+  // }
+
   public async getHello(): Promise<string> {
     const test = await lastValueFrom(
       this.exampleClient.emit('example.topic', { message: "HELLO WORLD" })
