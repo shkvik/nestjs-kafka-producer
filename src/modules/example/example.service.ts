@@ -12,7 +12,7 @@ export class ExampleService {
   
   public async getHello(): Promise<string> {
     const test = await lastValueFrom(
-      this.exampleClient.emit('EXAMPLE_TOPIC', "HELLO WORLD")
+      this.exampleClient.emit('example.topic', { message: "HELLO WORLD" })
     ) ;
     return JSON.stringify(test)
   }
