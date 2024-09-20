@@ -2,14 +2,14 @@ import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
 import { KafkaService } from '../kafka/kafka.service';
-import { CONFIG } from 'src/config/config.export';
+import { CONFIG_KAFKA } from 'src/config/config.export';
 
 @Injectable()
 export class ExampleService {
   private readonly logger = new Logger(ExampleService.name);
 
   constructor(
-    @Inject(CONFIG.KAFKA_SERVICE_NAME)
+    @Inject(CONFIG_KAFKA.KAFKA_SERVICE_NAME)
     private readonly exampleClient: ClientKafka,
     private readonly kafkaService: KafkaService
   ){}
