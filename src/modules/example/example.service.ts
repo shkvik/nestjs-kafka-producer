@@ -1,29 +1,24 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
+import { Admin } from '@nestjs/microservices/external/kafka.interface';
 import { lastValueFrom } from 'rxjs';
+import { KafkaService } from '../kafka/kafka.service';
 
 @Injectable()
 export class ExampleService {
-
   private readonly logger = new Logger(ExampleService.name);
-  
+
   constructor(
     @Inject('EXAMPLE_SERVICE')
-    private readonly exampleClient: ClientKafka
+    private readonly exampleClient: ClientKafka,
+    private readonly kafkaService: KafkaService
   ){}
-  
-  //Внедрить отдельно варианты отправки формата.
-  async onModuleInit() {
-    //this.exampleClient.subscribeToResponseOf('example.topic');
-    
-    await this.exampleClient.connect();
-    const admin = await this.exampleClient['client'].admin();
-    await admin.connect();
-    // Получаем метаданные для указанного топика
-    const metadata = await admin.fetchTopicMetadata({ topics: ['example.topic'] });
-    this.logger.debug(metadata)
+
+  public async getMetadata(){
+    const meta = await this.kafkaService.fetchTopicMetadata()
+    return JSON.stringify(meta, null, 2);
   }
-  
+
   public async getHello(): Promise<string> {
     const test = await lastValueFrom(
       this.exampleClient.emit('example.topic', { message: "HELLO WORLD" })
