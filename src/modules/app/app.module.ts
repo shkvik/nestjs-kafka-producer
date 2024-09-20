@@ -8,4 +8,4 @@ import { KafkaModule } from '../kafka/kafka.module';
     ExampleModule
   ],
 })
-export class AppModule {}
+export class AppModule { }
