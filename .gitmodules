@@ -1,4 +1,0 @@
-[submodule "src/shared"]
-	path = src/shared
-	url = git@github.com:shkvik/nestjs-kafka-shared.git
-	branch = main
