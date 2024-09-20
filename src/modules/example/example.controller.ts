@@ -1,6 +1,6 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Post, Query } from '@nestjs/common';
 import { ExampleService } from './example.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { MetadataDto } from './dto';
 
 @Controller()
@@ -10,8 +10,8 @@ export class ExampleController {
   constructor(private readonly exampleService: ExampleService) {}
 
   @Get('metadata')
-  public async getMetadata(dto: MetadataDto)  {
-    return this.exampleService.getMetadata();
+  public async getMetadata(@Query() dto: MetadataDto): Promise<string> {
+    return this.exampleService.getMetadata(dto);
   }
   
 

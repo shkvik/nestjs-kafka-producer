@@ -3,6 +3,7 @@ import { ClientKafka } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
 import { KafkaService } from '../kafka/kafka.service';
 import { CONFIG_KAFKA } from 'src/config/config.export';
+import { MetadataDto } from './dto';
 
 @Injectable()
 export class ExampleService {
@@ -14,8 +15,9 @@ export class ExampleService {
     private readonly kafkaService: KafkaService
   ){}
 
-  public async getMetadata(){
-    const meta = await this.kafkaService.fetchTopicMetadata()
+  public async getMetadata(dto: MetadataDto){
+    const { topics } = dto;
+    const meta = await this.kafkaService.fetchTopicMetadata();
     return JSON.stringify(meta, null, 2);
   }
 
