@@ -8,12 +8,12 @@ import { CONFIG } from "src/config/config.export";
   imports: [
     ClientsModule.register([
       {
-        name: 'EXAMPLE_SERVICE',
+        name: CONFIG.KAFKA_SERVICE_NAME,
         transport: Transport.KAFKA,
         options: {
           client: {
-            clientId: 'example-producer',
-            brokers: ['localhost:9092'],
+            clientId: CONFIG.KAFKA_CLIENT_ID,
+            brokers: [CONFIG.KAFKA_ADDRESS],
           },
           producerOnlyMode: true,
         },

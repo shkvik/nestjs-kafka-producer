@@ -1,6 +1,7 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { Admin } from '@nestjs/microservices/external/kafka.interface';
+import { CONFIG } from 'src/config/config.export';
 
 @Injectable()
 export class KafkaService {
@@ -9,7 +10,7 @@ export class KafkaService {
   private kafkaAdmin: Admin;
 
   constructor(
-    @Inject('EXAMPLE_SERVICE')
+    @Inject(CONFIG.KAFKA_SERVICE_NAME)
     private readonly clientKafka: ClientKafka
   ) { }
 
