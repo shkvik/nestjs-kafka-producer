@@ -1,6 +1,5 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
-import { Admin } from '@nestjs/microservices/external/kafka.interface';
 import { lastValueFrom } from 'rxjs';
 import { KafkaService } from '../kafka/kafka.service';
 

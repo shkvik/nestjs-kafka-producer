@@ -1,10 +1,10 @@
 import { plainToInstance } from "class-transformer";
 import { validateSync } from "class-validator";
-import { ConfigKafka, ConfigSchema, Test } from "./config.schema";
+import { ConfigSchema } from "./config.schema";
 
 
 export function validateEnv(config: Record<string, unknown>) {
-  const validatedConfig = plainToInstance(Test, config, {
+  const validatedConfig = plainToInstance(ConfigSchema, config, {
     enableImplicitConversion: true,
   });
   const errors = validateSync(validatedConfig, { skipMissingProperties: false });
