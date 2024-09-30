@@ -41,6 +41,18 @@ Clone the repository and configure the connection to your Kafka broker.
 Choose and configure the desired method for sending messages (broadcast, queueing by key, or rate-limited sending).
 Integrate the template into your application for quick and efficient Kafka message handling.
 
+## BroadCast
+
+Each application instance should have its own static consumer group, ensuring they can read from a single partition independently. This design allows for scalability by increasing the number of partitions if needed, though it's not a strict requirement for functionality.
+
+```mermaid
+flowchart TD
+    P["Producer"] --> K["Kafka"]
+    K -->|group Id 1| A["Replica 1"]
+    K -->|group Id 2| B["Replica 2"]
+    K -->|group Id 3| C["Replica 3"]
+```
+
 ## Project setup
 
 ```bash
