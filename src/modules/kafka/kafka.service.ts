@@ -5,8 +5,6 @@ import { CONFIG_KAFKA } from 'src/config/config.export';
 
 @Injectable()
 export class KafkaService {
-
-  private readonly logger = new Logger(KafkaService.name);
   private kafkaAdmin: Admin;
 
   constructor(

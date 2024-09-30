@@ -1,7 +1,12 @@
-import { Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { ExampleService } from './example.service';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
-import { MetadataDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
+import { 
+  BroadcastDto, 
+  LimitDto, 
+  MetadataDto, 
+  QueueDto
+} from './dto';
 
 @Controller()
 @ApiTags('Activities')
@@ -15,22 +20,17 @@ export class ExampleController {
   }
   
   @Post('broadcast')
-  public async emitBroadcast(){
-    return this.exampleService.emitBroadcast();
+  public async postBroadcast(@Body() dto: BroadcastDto): Promise<string> {
+    return this.exampleService.postBroadcast(dto);
   }
 
-  @Post('hello')
-  public async getHello(): Promise<string> {
-    return this.exampleService.getHello();
-  }
-
-  @Post('queue-message')
-  public async postQueueMessage (){
-    // Сделать отпрвку по очереди
+  @Post('queue')
+  public async postQueue(@Body() dto: QueueDto): Promise<string> {
+    return this.exampleService.postQueue(dto);
   }
 
   @Post('limit')
-  public async postLimit (){
-    // Сделать отпрвку на консюмер с лимитом используя ThrottlerModule в консюмере
+  public async postLimit(@Body() dto: LimitDto): Promise<string>{
+    return this.exampleService.postLimit(dto);
   }
 }
