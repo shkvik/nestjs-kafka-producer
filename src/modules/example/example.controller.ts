@@ -14,27 +14,9 @@ export class ExampleController {
     return this.exampleService.getMetadata(dto);
   }
   
-
-  /**
-   *  Сделать широковещательное сообщения для всех консюмеров из топика
-   *  1. Способ — создать для каждого потребителя уникальную группу потребителей.
-   * 
-   *     Как работает:
-   *     
-   *     Каждый потребитель присоединяется к Kafka как отдельная группа с уникальным groupId.
-   *     Поскольку группы не разделяют сообщения между потребителями, каждый из них получит сообщение независимо от других.
-   *     Пример:
-   *     
-   *     Допустим, у вас есть три потребителя, каждый с уникальной группой:
-   *     
-   *     consumer-group-1
-   *     consumer-group-2
-   *     consumer-group-3
-   *     Все они будут получать одно и то же сообщение от Kafka из всех партиций топика.
-   */
   @Post('broadcast')
-  public async postBroadcast(){
-
+  public async emitBroadcast(){
+    return this.exampleService.emitBroadcast();
   }
 
   @Post('hello')

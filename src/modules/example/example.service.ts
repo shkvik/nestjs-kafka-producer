@@ -27,4 +27,11 @@ export class ExampleService {
     ) ;
     return JSON.stringify(test)
   }
+
+  public async emitBroadcast(): Promise<string> {
+    const test = await lastValueFrom(
+      this.exampleClient.emit('broadcast.topic', { message: "HELLO WORLD" })
+    ) ;
+    return JSON.stringify(test)
+  }
 }
