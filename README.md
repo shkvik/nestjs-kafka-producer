@@ -22,9 +22,24 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Kafka Producer Template
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This repository serves as a template for a Kafka producer, offering flexible and powerful ways to send messages to Kafka topics. It supports three distinct methods of sending messages, making it a versatile solution for various data processing scenarios.
+
+## Features
+1. **Broadcast**:
+The message is sent to all partitions of a Kafka topic without binding to a specific key. This is used when you need to send a message to all consumers without partitioning by queues.
+
+2. **Queueing by Key**:
+The message is sent with a specific key, ensuring its delivery to a designated partition of the topic. This ensures sequential processing of messages with the same key and is used to manage tasks that require ordered processing in a queue.
+
+3. **Rate-limited Sending**:
+The ability to send messages at a specified rate limit. This approach is useful when you need to control the load on Kafka brokers or limit the processing speed for an even distribution of the load.
+
+## How to Use
+Clone the repository and configure the connection to your Kafka broker.
+Choose and configure the desired method for sending messages (broadcast, queueing by key, or rate-limited sending).
+Integrate the template into your application for quick and efficient Kafka message handling.
 
 ## Project setup
 
