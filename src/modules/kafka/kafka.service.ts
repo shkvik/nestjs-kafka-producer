@@ -1,6 +1,7 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { Admin } from '@nestjs/microservices/external/kafka.interface';
+import { ITopicMetadata } from 'kafkajs';
 import { CONFIG_KAFKA } from 'src/config/config.export';
 
 @Injectable()
@@ -18,7 +19,13 @@ export class KafkaService {
     await this.kafkaAdmin.connect();
   }
 
-  public async fetchTopicMetadata(topics?: string[]) {
-    return this.kafkaAdmin.fetchTopicMetadata({ topics });
+  public async fetchTopicMetadata(
+    topics?: string[]
+  ): Promise<{ topics: ITopicMetadata[] }> {
+    try {
+      return await this.kafkaAdmin.fetchTopicMetadata({ topics });
+    } catch(err) {
+      return err.message;
+    }
   }
 }
