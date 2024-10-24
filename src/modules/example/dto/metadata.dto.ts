@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsArray, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class MetadataDto {
   
