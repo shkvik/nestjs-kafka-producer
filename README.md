@@ -48,17 +48,27 @@ Each application instance should have its own static consumer group, ensuring th
 ```mermaid
 flowchart TD
     P["Producer"] --> K["Kafka"]
-    K -->|group Id 1| A["Replica 1"]
-    K -->|group Id 2| B["Replica 2"]
-    K -->|group Id 3| C["Replica 3"]
+    K -->|group Id 1| A["Consumer replica 1"]
+    K -->|group Id 2| B["Consumer replica 2"]
+    K -->|group Id 3| C["Consumer replica 3"]
 ```
 
-## Project setup
+## Queueing by Key
+...
 
+
+## Project setup
+1. Install dependencies
 ```bash
 $ npm install
 ```
-
+2. Create .env file by .env.example
+```env
+KAFKAJS_NO_PARTITIONER_WARNING=1
+NODE_ENV=local
+HOST=localhost
+...
+```
 ## Compile and run the project
 
 ```bash
@@ -83,6 +93,16 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+```
+
+## Docker build & run 
+
+```bash
+# build docker image
+$ docker build -t nestjs-kafka-producer .
+
+# run image with .env file
+$ docker run --env-file .env -d -p 3000:3000 nestjs-kafka-producer
 ```
 
 ## Resources
